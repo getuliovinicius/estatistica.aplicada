@@ -1,0 +1,150 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+ * ELEMENTOS HTML
+ */
+
+* {margin: 0; padding: 0;}
+
+body {margin: 0 auto; background-color: #FEFEFE; color: #333; font-family: "Open Sans", sans-serif; font-size: 12px; text-align: justify; vertical-align: middle; outline: 0; line-height: 180%;}
+
+header, nav, footer, aside, section, article, figure {display: block;}
+
+h1, h2, h3, p {margin-bottom: 10px; padding: 5px;}
+
+h1 {font-size: 26px;}
+
+h2 h3 {font-size: 14px;}
+
+a:link, a:visited {color: #805115; text-decoration: none;}
+
+a:hover, a:active {color: #552F00; text-decoration: underline;}
+
+img {margin: 0; padding: 0; border: none;}
+
+a img {border: none;}
+
+/*
+ * ESTRUTURA DAS PAGINAS
+ */
+
+#header {width: 100%; height: auto; float: left; background-color: #000; color: #DDD;}
+
+#headerContent {width: 100%; max-width: 1024px; height: auto; margin: 0 auto; /*background-color: #666;*/ text-align: center;}
+
+#headerContent h1 {margin: 0; padding: 10px; color: #EBE9A6; font-size: 24px; font-weight: bold;}
+
+.headerContentSubtitle {margin: 0; padding: 20px; color: #FFF; font-size: 18px; font-weight: normal;}
+
+.headerContentSubtitle a {color: #FFF}
+
+#menu {width: 100%; height: 40px; float: left; background-color: #555; color: #DDD;}
+
+#menuContent {width: 100%; max-width: 1024px; height: 40px; margin: 0 auto; /*background-color: #444;*/}
+
+#menuContentLeft {width: 80%; height: 40px; float: left;}
+
+#menuContentLeft ul {margin: 0; padding: 0; list-style: none;}
+
+#menuContentLeft li {height: 40px; line-height: 40px; float: left; margin-left: 5px; margin-right: 5px; font-weight: bold;}
+
+#menuContentLeft li a {padding-left: 5px; padding-right: 5px; display: block; color: #EEE; text-decoration: none; transition: all 0.2s linear;}
+
+#menuContentLeft li a:hover {background-color: #333; color: #EBE9A6; text-decoration: none;}
+
+#menuContentRight {width: 20%; height: 40px; float: left; text-align: right;}
+
+#menuContentRight ul {margin: 0; padding: 0; list-style: none;}
+
+#menuContentRight li {height: 40px; line-height: 40px; display: inline-block;}
+
+/*#menuContentRigth li a {}*/
+
+#menuContentRight li:hover {background-color: #333;}
+
+#menuContentRight img {margin: 8px 8px; vertical-align: middle;}
+
+#main {width: 100%; height: auto; float: left; background-color: #FFF;}
+
+#mainContainer {width: 100%; max-width: 1024px; height: auto; margin: 0 auto; display: block; background-color: #EEE;}
+
+#mainSection {width: 756px; height: auto; margin: 20px 6px; float: left; background-color: #FAFAFA; word-wrap: break-word;}
+
+#mainAside {width: 244px; height: auto; margin: 20px 6px; float: right; background-color: #F5F5F5; color: #777; text-align: left; word-wrap: break-word;}
+
+#mainAside h2, p {padding: 6px 10px;}
+
+#mainAside ul {margin: 0px; padding: 6px 10px;}
+
+#mainAside li {margin: 0px 20px; padding: 0px;}
+
+#boxMessage {width: 220px; margin: 10px auto; padding: 6px; display: none; background-color: #EBE9A6; color: green; font-weight: bold; text-align: center;}
+
+#bottom {width: 100%; height: auto; float: left; background-color: #555; color: #DDD; text-align: left;}
+
+#bottomContent {width: 100%; max-width: 1024px; height: auto; margin: 0 auto; /*background-color: #666;*/}
+
+#bottomContent p {margin: 0; padding: 10px;}
+
+#bottomContent a {color: #EBE9A6; text-decoration: none;}
+
+#bottomContent a:hover {color: #CBC9A6; text-decoration: underline;}
+
+/*
+ * ELEMENTOS DO ONTEUDO PRINCIPAL DA PAGINA
+ */
+
+.mainArticleBox {width: 100%; height: auto; margin: 0px auto; float: left; /*background-color: #F7F7F7;*/ font-size: 14px;}
+
+#formColetaDados {width: 100%; height: auto; margin: auto; float: left; border-bottom: 1px solid #CCC; background-color: #F7F7F7;}
+
+#formColetaDados span {margin: 10px 0px; vertical-align: middle;}
+
+#formColetaDados input[type=checkbox] {margin: 10px 0px; vertical-align: middle;}
+
+#formColetaDados input[type=number] {width: 50px; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #CCC; background-color: #F9F9F9; color: #666; vertical-align: middle;}
+
+#formColetaDados input[type=text] {width: 80%; resize: none; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #CCC; background-color: #F9F9F9; color: #666; vertical-align: middle;}
+
+#formColetaDados input[type=submit], input[type=reset] {resize: none; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #888; background-color: #EBE9A6; color: #666; vertical-align: middle; cursor: pointer;}
+
+#formColetaDados textarea {width: 100%; height: 70px; resize: none; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #CCC; background-color: #F9F9F9;}
+
+#boxCarregarDados {width: 736px; padding: 10px; float: left; /*background-color: #FBFBFB;*/}
+
+.boxOpcoesDados {width: 358px; padding: 10px; float: left; /*background-color: #FBFBFB;*/}
+
+#boxEnviarDados {width: 736px; padding: 10px; float: left; border-bottom: 1px solid #CCC; /*background-color: #FBFBFB;*/}
+
+.boxExibeDados {width: 358px; padding: 10px; float: left; /*background-color: #FBFBFB;*/}
+
+#boxPopulacao {width: 736px; padding: 10px; float: left; border-bottom: 1px solid #CCC; background-color: #FAFAFA; font-size: 14px;}
+
+#boxPopulacao span {width: 338px; padding: 10px; float: left;}
+
+#tableFrequencia {width: 736px; padding: 10px; float: left; border-bottom: 1px solid #CCC; background-color: #FAFAFA;}
+
+#tableFrequencia table {width: 100%;}
+
+#tableFrequencia th {padding: 4px 8px; /*border: 2px solid #CCC;*/ background-color: #777; color: #EBE9A6; text-align: center;}
+
+#tableFrequencia td {padding: 4px 8px; /*border: 2px solid #CCC;*/ background-color: #EEE; color: #777; text-align: right;}
+
+/*
+ * LAYOUT RESPONSIVO
+ */
+
+@media only screen and (max-width: 1024px) {
+	#menuContentRight {display: none;}
+
+	#menuContentLeft {width: 100%;}
+
+	#mainSection {width: 378px; margin: auto 6px; padding: 10px 6px; float: left;}
+
+	#mainAside {width: 378px; margin: auto 6px; padding: 10px 6px; float: left;}
+
+	#boxCarregarDados {width: 358px; margin: auto;}
+
+	#boxEnviarDados {width: 358px; margin: auto;}
+}
