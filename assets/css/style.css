@@ -92,7 +92,7 @@ a img {border: none;}
 #bottomContent a:hover {color: #CBC9A6; text-decoration: underline;}
 
 /*
- * ELEMENTOS DO ONTEUDO PRINCIPAL DA PAGINA
+ * ELEMENTOS DO CONTEUDO PRINCIPAL DA PAGINA
  */
 
 .mainArticleBox {width: 100%; height: auto; margin: 0px auto; float: left; /*background-color: #F7F7F7;*/ font-size: 14px;}
@@ -119,11 +119,11 @@ a img {border: none;}
 
 .boxExibeDados {width: 358px; padding: 10px; float: left; /*background-color: #FBFBFB;*/}
 
-#boxPopulacao {width: 736px; padding: 10px; float: left; border-bottom: 1px solid #CCC; background-color: #FAFAFA; font-size: 14px;}
+#boxPopulacao {width: 736px; padding: 10px; float: left; display: none; border-bottom: 1px solid #CCC; background-color: #FAFAFA; font-size: 14px;}
 
 #boxPopulacao span {width: 338px; padding: 10px; float: left;}
 
-#tableFrequencia {width: 736px; padding: 10px; float: left; border-bottom: 1px solid #CCC; background-color: #FAFAFA;}
+#tableFrequencia {width: 736px; padding: 10px; float: left; display: none; border-bottom: 1px solid #CCC; background-color: #FAFAFA;}
 
 #tableFrequencia table {width: 100%;}
 

@@ -46,14 +46,15 @@
 
 		<h2>População</h2>
 
-		<span id="populacaoTamanho"></span>
-		<span id="populacaoMedia"></span>
-		<span id="populacaoMediana"></span>
-		<span id="populacaoModa"></span>
-		<span id="populacaoVariancia"></span>
-		<span id="populacaoVarianciaRelativa"></span>
-		<span id="populacaoDesvioPadrao"></span>
-		<span id="populacaoCoeficienteVariacao"></span>
+		<span id="somatorioFi"></span>
+		<span id="somatorioDados"></span>
+		<span id="media"></span>
+		<span id="mediana"></span>
+		<span id="moda"></span>
+		<span id="variancia"></span>
+		<span id="varianciaRelativa"></span>
+		<span id="desvioPadrao"></span>
+		<span id="coeficienteVariacao"></span>
 
 	</div>
 
@@ -74,6 +75,7 @@
 				</tr>
 			</thead>
 			<tbody></tbody>
+			<tfoot></tfoot>
 		</table>
 
 	</div>

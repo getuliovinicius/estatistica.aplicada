@@ -1,9 +1,9 @@
-//var $jQuery = jQuery.noConflict(); 
+//var $jQuery = jQuery.noConflict();
 $(function() {
 
 	$('#nao-agrupados a').css('background-color', '#333').css('color', '#EBE9A6').css('text-decoration', 'none');
 
-	/*$('#formColetaDados').bind('submit', function(event) {
+	$('#formColetaDados').bind('submit', function(event) {
 
 		event.preventDefault();
 
@@ -25,31 +25,34 @@ $(function() {
 
 				if (resultado.error === undefined) {
 					//console.log(resultado);
+					$("#boxPopulacao").css('display', 'block');
+					$("#tableFrequencia").css('display', 'block');
 					$('#boxMessage').html('Dados inseridos com sucesso.').css('background-color', '#A4D899').css('color', '#125005').css('display', 'block');
 					$('#sbmtDados').val('Atualizar');
 					$('#txtaDadosDesordenados').val(resultado.dadosDesordenados);
 					$('#txtaDadosOrdenados').val(resultado.dadosOrdenados);
-					$('#populacaoTamanho').html('<strong>Tamanho:</strong> ' + resultado.populacaoTamanho);
-					$('#populacaoMedia').html('<strong>Média:</strong> ' + resultado.populacaoMedia);
-					$('#populacaoMediana').html('<strong>Mediana:</strong> ' + resultado.populacaoMediana);
-					$('#populacaoModa').html('<strong>Moda:</strong> ' + resultado.populacaoModa);
-					$('#populacaoVariancia').html('<strong>Variância:</strong> ' + resultado.populacaoVariancia);
-					$('#populacaoVarianciaRelativa').html('<strong>Variância Relativa:</strong> ' + resultado.populacaoVarianciaRelativa);
-					$('#populacaoDesvioPadrao').html('<strong>Desvio Padrão:</strong> ' + resultado.populacaoDesvioPadrao);
-					$('#populacaoCoeficienteVariacao').html('<strong>Coeficiente de Variação:</strong> ' + resultado.populacaoCoeficienteVariacao + '%');
+					$('#somatorioFi').html('<strong>Somatório fi:</strong> ' + resultado.somatorioFi);
+					$('#somatorioDados').html('<strong>Somatório dos dados:</strong> ' + resultado.somatorioDados);
+					$('#media').html('<strong>Média:</strong> ' + resultado.media);
+					$('#mediana').html('<strong>Mediana:</strong> ' + resultado.mediana);
+					$('#moda').html('<strong>Moda:</strong> ' + resultado.moda);
+					$('#variancia').html('<strong>Variância:</strong> ' + resultado.variancia);
+					$('#varianciaRelativa').html('<strong>Variância Relativa:</strong> ' + resultado.varianciaRelativa);
+					$('#desvioPadrao').html('<strong>Desvio Padrão:</strong> ' + resultado.desvioPadrao);
+					$('#coeficienteVariacao').html('<strong>Coeficiente de Variação:</strong> ' + resultado.coeficienteVariacao + '%');
 					
-					var tbody = ''
+					var tbody = '';
 
-					$.each(resultado.arrayFi, function(elemento, elementoFi) {
+					$.each(resultado.fi, function(elemento, elementoFi) {
 
 						tbody += '<tr>';
 						tbody += '<td>' + elemento + '</td>';
 						tbody += '<td>' + elementoFi + '</td>';
-						tbody += '<td>' + resultado.arrayFri[elemento] + '</td>';
-						tbody += '<td>' + resultado.arrayFrip[elemento] + '</td>';
-						tbody += '<td>' + resultado.arrayFaci[elemento] + '</td>';
-						tbody += '<td>' + resultado.arrayFraci[elemento] + '</td>';
-						tbody += '<td>' + resultado.arrayFracip[elemento] + '</td>';
+						tbody += '<td>' + resultado.fri[elemento] + '</td>';
+						tbody += '<td>' + resultado.frip[elemento] + '%</td>';
+						tbody += '<td>' + resultado.faci[elemento] + '</td>';
+						tbody += '<td>' + resultado.fraci[elemento] + '</td>';
+						tbody += '<td>' + resultado.fracip[elemento] + '%</td>';
 						tbody += '</tr>';
 
 					});
@@ -68,6 +71,29 @@ $(function() {
 
 		});
 
-	});*/
+	});
+
+	$('#formColetaDados').bind('reset', function(event) {
+
+		event.preventDefault();
+
+		$("#tableFrequencia tbody").html('');
+		$('#somatorioFi').html('');
+		$('#media').html('');
+		$('#mediana').html('');
+		$('#moda').html('');
+		$('#variancia').html('');
+		$('#varianciaRelativa').html('');
+		$('#desvioPadrao').html('');
+		$('#coeficienteVariacao').html('');
+		$("#boxMessage").css('display', 'none');
+		$("#boxPopulacao").css('display', 'none');
+		$("#tableFrequencia").css('display', 'none');
+		$('#sbmtDados').val('Inserir');
+		$('#txtaDadosDesordenados').val('');
+		$('#txtaDadosOrdenados').val('');
+		$('#txtDados').val('').focus();
+
+	});
 
 });

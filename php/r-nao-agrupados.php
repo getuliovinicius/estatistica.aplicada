@@ -25,157 +25,157 @@ if (!empty($dados)) {
 
 //********************************************************//
 
-// Explode os dados das strings para para um array $rol
-$rol = explode(", ", $dadosOrdenados);
+// Explode os dados das strings para para um array $preRol e ordena os dados do array $rol
+$preRol = explode(",", $dadosDesordenados);
+$rol = array();
 
-//********************************************************//
+foreach ($preRol as $ordem => $elemento) {
 
-// Ordena os dados do array $rol
+	$rol[$ordem] = trim($elemento);
+
+}
+
+$dadosDesordenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
+
 sort($rol);
+
 $dadosOrdenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
-echo "<pre>Rol:<br>";
-print_r($rol);	
-echo "<pre>";
+//echo "<pre>Rol:<br>";
+//print_r($rol);	
+//echo "<pre>";
 
 //********************************************************//
 
 // Tamanho da populacao
-$populacaoTamanho = count($rol);
-echo "<pre>Tamanho: ".$populacaoTamanho."</pre>";
+$somatorioFi = count($rol);
+//echo "<pre>Somatorio fi: ".$somatorioFi."</pre>";
 
 //********************************************************//
 
 // Soma dos valores da populacao
-$populacaoSomatorio = array_sum($rol);
-echo "<pre>Somatorio: ".$populacaoSomatorio."</pre>";
+$somatorioDados = array_sum($rol);
+//echo "<pre>Somatorio dados: ".$somatorioDados."</pre>";
 
 //********************************************************//
 
 // Media
-$media = round($populacaoSomatorio / $populacaoTamanho, $casasDecimais);
-echo "<pre>Média: ".$media."</pre>";
+$media = round($somatorioDados / $somatorioFi, $casasDecimais);
+//echo "<pre>Média: ".$media."</pre>";
 
 //********************************************************//
 
 // Mediana
-if (($populacaoTamanho % 2) == 0) {
+if (($somatorioFi % 2) == 0) {
 
-	$posicaoMediana = ($populacaoTamanho / 2) - 1;
+	$posicaoMediana = ($somatorioFi / 2) - 1;
 
 } else {
 
-	$posicaoMediana = (($populacaoTamanho + 1) / 2) - 1;
+	$posicaoMediana = (($somatorioFi + 1) / 2) - 1;
 
 }
 
 $mediana = $rol[$posicaoMediana];
-echo "<pre>Posição Mediana: ".$posicaoMediana." Mediana: ".$mediana."</pre>";
+//echo "<pre>Posição Mediana: ".$posicaoMediana." Mediana: ".$mediana."</pre>";
 
 //********************************************************//
 
 // Frequencia simples de cada elelemento da populacao
-//$arrayFi = array_count_values($rol);
-/*echo "<pre>Frequência:<br>";
-print_r($arrayFi);	
-echo "<pre>";*/
+$fi = array_count_values($rol);
+//echo "<pre>fi<br>";
+//print_r($fi);	
+//echo "<pre>";
 
 //********************************************************//
 
 // Moda
-//$fiMaior = max($arrayFi);
+$fiMaior = max($fi);
 
-//$modaElementos = array();
+$modaElementos = array();
 
-//foreach ($arrayFi as $elemento => $elementoFi) {
+foreach ($fi as $elemento => $elementoFi) {
 	
-//	if ($elementoFi == $fiMaior) {
+	if ($elementoFi == $fiMaior) {
 
-//		$modaElementos[] = $elemento;
+		$modaElementos[] = $elemento;
 
-//	}
+	}
 
-//}
+}
 
-//$populacaoModa = (count($modaElementos) == 1) ? $modaElementos[0] : implode(", ", $modaElementos);
-/*echo "<pre>Moda:<br>";
-print_r($populacaoModa);	
-echo "<pre>";*/
+$moda = (count($modaElementos) == 1) ? $modaElementos[0] : implode("; ", $modaElementos);
+//echo "<pre>Moda: ".$moda."<pre>";
 
 //********************************************************//
 
 // Variancia
-//$somatorio = 0;
+$somatorioXiMediaFi = 0;
 
-//foreach ($arrayFi as $elemento => $elementoFi) {
+foreach ($fi as $elemento => $elementoFi) {
 	
-	//echo "<pre>";
-//	$a = $elemento - $populacaoMedia;
-	//echo "a = ".$a."<br>";
-//	$b = $a ** 2;
-	//echo "b = ".$b."<br>";
-//	$c = $b * $elementoFi;
-	//echo "c = ".$c."<br>";
-//	$somatorio += $c; 
-	//echo "Somatório = ".$somatorio."</pre>";
+	$numerador = (($elemento - $media) ** 2) * $elementoFi;
+	//echo "<pre>((".$elemento." - ".$media.")²) * ".$elementoFi." = ".$a."</pre>";
+	$somatorioXiMediaFi += $numerador; 
+	//echo "<pre>Somatório = ".$somatorioXiMediaFi."</pre>";
 
-//}
+}
 
-//$a = $somatorio / $populacaoTamanho;
-//$populacaoVariancia = round($a, $casasDecimais);
-//echo "<pre>Variância = ".$populacaoVariancia."</pre>";
+$variancia = round($somatorioXiMediaFi / $somatorioFi, $casasDecimais);
+//echo "<pre>Variância = ".$variancia."</pre>";
 
 //********************************************************//
 
 // Variancia Relativa
-//$a = $populacaoMedia ** 2;
-//$b = $populacaoVariancia / $a;
-//	$populacaoVarianciaRelativa = round($b, $casasDecimais);
+$varianciaRelativa = round($variancia / ($media ** 2), $casasDecimais);
+//echo "<pre>Variância Relativa = ".$varianciaRelativa."</pre>";
 
 //********************************************************//
 
-// Desvio Padrão
-//$a = sqrt($populacaoVariancia);
-//$populacaoDesvioPadrao = round($a, $casasDecimais);
-//echo "<pre>Desvio Padrão = ".$populacaoDesvioPadrao."</pre>";
+// Desvio Padrao
+$desvioPadrao = round(sqrt($variancia), $casasDecimais);
+//echo "<pre>Desvio Padrão = ".$desvioPadrao."</pre>";
 
 //********************************************************//
 
-// Coeficiente de Variação
-//$a = $populacaoDesvioPadrao / $populacaoMedia;
-//$b = $a * 100;
-//$populacaoCoeficienteVariacao = round($b, $casasDecimais);
+// Coeficiente de Variacao
+$coeficienteVariacao = round(($desvioPadrao / $media) * 100, $casasDecimais);
+//echo "<pre>Coeficiente de Variação = ".$coeficienteVariacao."</pre>";
 
 //********************************************************//
 
-// Define as frequencias de cada elemento em arrays
-//$arrayFri = array();
-//$arrayFrip = array();
-//$arrayFaci = array();
-//$arrayFraci = array();
-//$arrayFracip = array();
+// Define as demais frequencias de cada elemento em arrays
+$fri = array();
+$frip = array();
+$faci = array();
+$fraci = array();
+$fracip = array();
 
 // Frequencia acumulada inicial
-//$faci = 0;
+$somaFaci = 0;
 
-//foreach ($arrayFi as $elemento => $elementoFi) {
+foreach ($fi as $elemento => $elementoFi) {
 
 	// Frequencia relativa
-//	$a = $elementoFi / $populacaoTamanho;
-//	$arrayFri[$elemento] = round($a, $casasDecimais);
+	$a = $elementoFi / $somatorioFi;
+	$fri[$elemento] = round($a, $casasDecimais);
+	
 	// Frequencia relativa percentual
-//	$b = $a * 100;
-//	$arrayFrip[$elemento] = round($b, $casasDecimais);
+	$b = $a * 100;
+	$frip[$elemento] = round($b, $casasDecimais);
+	
 	// Frequencia acumulada
-//	$faci += $elementoFi;
-//	$arrayFaci[$elemento] = $faci;
+	$somaFaci += $elementoFi;
+	$faci[$elemento] = $somaFaci;
+	
 	// Frequencia relativa acumulada
-//	$a = $faci / $populacaoTamanho;
-//	$arrayFraci[$elemento] = round($a, $casasDecimais);
+	$a = $somaFaci / $somatorioFi;
+	$fraci[$elemento] = round($a, $casasDecimais);
+	
 	// Frequencia relativa acumulada percentual
-//	$b = $a * 100;
-//	$arrayFracip[$elemento] = round($b, $casasDecimais);
+	$b = $a * 100;
+	$fracip[$elemento] = round($b, $casasDecimais);
 
-//}
+}
 
 //********************************************************//
 
@@ -183,20 +183,21 @@ echo "<pre>";*/
 $resultado = array(
 	"dadosDesordenados" => $dadosDesordenados,
 	"dadosOrdenados" => $dadosOrdenados,
-	"populacaoTamanho" => $populacaoTamanho,
+	"somatorioFi" => $somatorioFi,
+	"somatorioDados" => $somatorioDados,
 	"media" => $media,
-	"mediana" => $mediana
-//	"populacaoModa" => $populacaoModa,
-//	"populacaoVariancia" => $populacaoVariancia,
-//	"populacaoVarianciaRelativa" => $populacaoVarianciaRelativa,
-//	"populacaoDesvioPadrao" => $populacaoDesvioPadrao,
-//	"populacaoCoeficienteVariacao" => $populacaoCoeficienteVariacao,
-//	"arrayFi" => $arrayFi,
-//	"arrayFri" => $arrayFri,
-//	"arrayFrip" => $arrayFrip,
-//	"arrayFaci" => $arrayFaci,
-//	"arrayFraci" => $arrayFraci,
-//	"arrayFracip" => $arrayFracip
+	"mediana" => $mediana,
+	"moda" => $moda,
+	"variancia" => $variancia,
+	"varianciaRelativa" => $varianciaRelativa,
+	"desvioPadrao" => $desvioPadrao,
+	"coeficienteVariacao" => $coeficienteVariacao,
+	"fi" => $fi,
+	"fri" => $fri,
+	"frip" => $frip,
+	"faci" => $faci,
+	"fraci" => $fraci,
+	"fracip" => $fracip
 );
 
 //********************************************************//
@@ -204,9 +205,9 @@ $resultado = array(
 END:
 
 // Retorna os valores em formato json
-echo "<pre>";
+//echo "<pre>";
 echo json_encode($resultado);
-echo "</pre>";
+//echo "</pre>";
 
 //********************************************************//
 ?>
