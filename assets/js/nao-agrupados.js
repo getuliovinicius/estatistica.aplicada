@@ -31,15 +31,31 @@ $(function() {
 					$('#sbmtDados').val('Atualizar');
 					$('#txtaDadosDesordenados').val(resultado.dadosDesordenados);
 					$('#txtaDadosOrdenados').val(resultado.dadosOrdenados);
-					$('#somatorioFi').html('<strong>Somatório fi:</strong> ' + resultado.somatorioFi);
-					$('#somatorioDados').html('<strong>Somatório dos dados:</strong> ' + resultado.somatorioDados);
-					$('#media').html('<strong>Média:</strong> ' + resultado.media);
-					$('#mediana').html('<strong>Mediana:</strong> ' + resultado.mediana);
-					$('#moda').html('<strong>Moda:</strong> ' + resultado.moda);
-					$('#variancia').html('<strong>Variância:</strong> ' + resultado.variancia);
-					$('#varianciaRelativa').html('<strong>Variância Relativa:</strong> ' + resultado.varianciaRelativa);
-					$('#desvioPadrao').html('<strong>Desvio Padrão:</strong> ' + resultado.desvioPadrao);
-					$('#coeficienteVariacao').html('<strong>Coeficiente de Variação:</strong> ' + resultado.coeficienteVariacao + '%');
+					$('#somatorioFi').html('<strong>Somatório fi:</strong> ' + resultado.somatorioFi).css('display', 'block');
+					
+					if (resultado.variavel == 1) {
+					
+						$('#somatorioDados').html('<strong>Somatório dos dados:</strong> ' + resultado.somatorioDados).css('display', 'block');
+						$('#media').html('<strong>Média:</strong> ' + resultado.media).css('display', 'block');
+						$('#mediana').html('<strong>Mediana:</strong> ' + resultado.mediana).css('display', 'block');
+						$('#moda').html('<strong>Moda:</strong> ' + resultado.moda).css('display', 'block');
+						$('#variancia').html('<strong>Variância:</strong> ' + resultado.variancia).css('display', 'block');
+						$('#varianciaRelativa').html('<strong>Variância Relativa:</strong> ' + resultado.varianciaRelativa).css('display', 'block');
+						$('#desvioPadrao').html('<strong>Desvio Padrão:</strong> ' + resultado.desvioPadrao).css('display', 'block');
+						$('#coeficienteVariacao').html('<strong>Coeficiente de Variação:</strong> ' + resultado.coeficienteVariacao + '%').css('display', 'block');
+					
+					} else {
+
+						$('#somatorioDados').html('').css('display', 'none');
+						$('#media').html('').css('display', 'none');
+						$('#mediana').html('').css('display', 'none');
+						$('#moda').html('').css('display', 'none');
+						$('#variancia').html('').css('display', 'none');
+						$('#varianciaRelativa').html('').css('display', 'none');
+						$('#desvioPadrao').html('').css('display', 'none');
+						$('#coeficienteVariacao').html('').css('display', 'none');
+
+					}
 					
 					var tbody = '';
 
@@ -78,20 +94,22 @@ $(function() {
 		event.preventDefault();
 
 		$("#tableFrequencia tbody").html('');
-		$('#somatorioFi').html('');
-		$('#media').html('');
-		$('#mediana').html('');
-		$('#moda').html('');
-		$('#variancia').html('');
-		$('#varianciaRelativa').html('');
-		$('#desvioPadrao').html('');
-		$('#coeficienteVariacao').html('');
+		$('#somatorioFi').html('').css('display', 'none');
+		$('#somatorioDados').html('').css('display', 'none');
+		$('#media').html('').css('display', 'none');
+		$('#mediana').html('').css('display', 'none');
+		$('#moda').html('').css('display', 'none');
+		$('#variancia').html('').css('display', 'none');
+		$('#varianciaRelativa').html('').css('display', 'none');
+		$('#desvioPadrao').html('').css('display', 'none');
+		$('#coeficienteVariacao').html('').css('display', 'none');
 		$("#boxMessage").css('display', 'none');
 		$("#boxPopulacao").css('display', 'none');
 		$("#tableFrequencia").css('display', 'none');
 		$('#sbmtDados').val('Inserir');
 		$('#txtaDadosDesordenados').val('');
 		$('#txtaDadosOrdenados').val('');
+		$('#slctVariavel').val('0');
 		$('#txtDados').val('').focus();
 
 	});

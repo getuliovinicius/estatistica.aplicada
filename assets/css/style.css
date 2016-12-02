@@ -51,6 +51,8 @@ a img {border: none;}
 
 #menuContentLeft li a {padding-left: 5px; padding-right: 5px; display: block; color: #EEE; text-decoration: none; transition: all 0.2s linear;}
 
+#somatorioFi, #somatorioDados, #media, #mediana, #moda, #variancia, #varianciaRelativa, #desvioPadrao, #CoeficienteVariacao {display: none;}
+
 #menuContentLeft li a:hover {background-color: #333; color: #EBE9A6; text-decoration: none;}
 
 #menuContentRight {width: 20%; height: 40px; float: left; text-align: right;}
@@ -103,11 +105,13 @@ a img {border: none;}
 
 #formColetaDados input[type=checkbox] {margin: 10px 0px; vertical-align: middle;}
 
-#formColetaDados input[type=number] {width: 50px; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #CCC; background-color: #F9F9F9; color: #666; vertical-align: middle;}
+#formColetaDados input[type=number] {width: 70px; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #CCC; background-color: #F9F9F9; color: #666; vertical-align: middle; -webkit-appearance: none; -moz-appearance: none;}
 
 #formColetaDados input[type=text] {width: 80%; resize: none; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #CCC; background-color: #F9F9F9; color: #666; vertical-align: middle;}
 
 #formColetaDados input[type=submit], input[type=reset] {resize: none; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #888; background-color: #EBE9A6; color: #666; vertical-align: middle; cursor: pointer;}
+
+#formColetaDados select {width: 200px; margin: 10px 0px; padding: 5px 5px; box-sizing: content-box; border: 2px solid #CCC; background-color: #F9F9F9; color: #666; vertical-align: middle;}
 
 #formColetaDados textarea {width: 100%; height: 70px; resize: none; margin: 10px 0px; padding: 5px 5px; box-sizing: border-box; border: 2px solid #CCC; background-color: #F9F9F9;}
 

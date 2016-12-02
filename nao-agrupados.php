@@ -8,8 +8,8 @@
 
 	<h1>Dados NÃO agrupados</h1>
 
-	<form method="POST" id="formColetaDados" action="/php/r-nao-agrupados.php">
-	<!--<form method="POST" id="formColetaDados">-->
+	<!--<form method="POST" id="formColetaDados" action="/php/r-nao-agrupados.php">-->
+	<form method="POST" id="formColetaDados">
 								
 		<!--<h2>Coleta de Dados</h2>-->
 	
@@ -19,8 +19,17 @@
 		</div>
 
 		<div class="boxOpcoesDados">
+			<label for="slctVariavel">Variavel:</label><br>
+			<select name="slctVariavel" id="slctVariavel">
+				<option value="0" selected="selected">-----</option>
+				<option value="1">Quantitativa</option>
+				<option value="2">Qualitativa</option>
+			</select>
+		</div>
+
+		<div class="boxOpcoesDados">
+			<span>Casas Decimais.</span><br>
 			<input type="number" name="nbrCasasDecimais" id="nbrCasasDecimais" min="0" max="9" value="2" required="required">
-			<span>Casas Decimais.</span>
 		</div>
 
 		<div id="boxEnviarDados">
@@ -96,14 +105,15 @@
 				<ul>
 					<li>Insira os dados um a um, ou separados por virgula.<br>Ex: 1, 3, 23, 54, 119</li>
 					<li>Use (.) ponto para valores decimais.<br>Ex: 1.2, 2.4, 23.12</li>
+					<li>Outras formas:<br>A, B, C, D, A, D, C, F, A<br>João, Maria, Joaquim, Joana, João</li>
 				</ul>
 				<p><strong>Casas Decimais:</strong></p>
 				<p>Escolha de 0 até 9 a quantidade de casas decimais que deseja para arredondar os cálculos.</p>
 
 <?php
-echo "<p><strong>Parâmetro GET:</strong> ";
+/*echo "<p><strong>Parâmetro GET:</strong> ";
 echo $target;    
-echo "</p>";
+echo "</p>";*/
 ?>
 
 

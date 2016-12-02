@@ -6,6 +6,8 @@ $dados = $_POST["txtDados"];
 $dadosDesordenados = $_POST["txtaDadosDesordenados"];
 $dadosOrdenados = $_POST["txtaDadosOrdenados"];
 $casasDecimais = $_POST["nbrCasasDecimais"];
+$variavel = $_POST["slctVariavel"];
+//echo "<pre>variavel: ".$variavel."</pre>";
 
 //********************************************************//
 
@@ -46,14 +48,45 @@ $dadosOrdenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
 
 //********************************************************//
 
+// Frequencia simples de cada elelemento da populacao
+$fi = array_count_values($rol);
+//echo "<pre>fi<br>";
+//print_r($fi);	
+//echo "<pre>";
+
+//********************************************************//
+
 // Tamanho da populacao
-$somatorioFi = count($rol);
+$somatorioFi = array_sum($fi);
 //echo "<pre>Somatorio fi: ".$somatorioFi."</pre>";
 
 //********************************************************//
 
 // Soma dos valores da populacao
-$somatorioDados = array_sum($rol);
+if ($variavel == 1) {
+
+	$somatorioDados = array_sum($rol);
+
+} elseif ($variavel == 2) {
+
+	$somatorioDados = array_sum($fi);
+
+} else {
+
+	// Vai para o fim do script e retorna com erro
+	$resultado = array("error" => "Tipo de variável não informado.");
+	goto END;
+
+}
+
+if ($somatorioDados == 0) {
+
+	// Vai para o fim do script e retorna com erro
+	$resultado = array("error" => "Tipo de variável incorreto.");
+	goto END;
+
+}
+
 //echo "<pre>Somatorio dados: ".$somatorioDados."</pre>";
 
 //********************************************************//
@@ -77,14 +110,6 @@ if (($somatorioFi % 2) == 0) {
 
 $mediana = $rol[$posicaoMediana];
 //echo "<pre>Posição Mediana: ".$posicaoMediana." Mediana: ".$mediana."</pre>";
-
-//********************************************************//
-
-// Frequencia simples de cada elelemento da populacao
-$fi = array_count_values($rol);
-//echo "<pre>fi<br>";
-//print_r($fi);	
-//echo "<pre>";
 
 //********************************************************//
 
@@ -181,6 +206,7 @@ foreach ($fi as $elemento => $elementoFi) {
 
 // Monta um array para retornar os valores
 $resultado = array(
+	"variavel" => $variavel,
 	"dadosDesordenados" => $dadosDesordenados,
 	"dadosOrdenados" => $dadosOrdenados,
 	"somatorioFi" => $somatorioFi,
