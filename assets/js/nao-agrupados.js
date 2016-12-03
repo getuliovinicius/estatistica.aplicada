@@ -24,6 +24,7 @@ $(function() {
 			success: function(resultado) {
 
 				if (resultado.error === undefined) {
+
 					//console.log(resultado);
 					$("#boxPopulacao").css('display', 'block');
 					$("#tableFrequencia").css('display', 'block');

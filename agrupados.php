@@ -19,15 +19,15 @@
 		</div>
 
 		<div class="boxOpcoesDados">
-			<span>Casas Decimais.</span>
-			<input type="number" name="nbrCasasDecimais" id="nbrCasasDecimais" min="0" max="9" value="2" required="required">
+			<span>Fator de Ajuste.</span><br>
+			<input type="number" name="nbrFatorAjuste" id="nbrFatorAjuste" min="-3" max="3" value="0" required="required">
 		</div>
 
 		<div class="boxOpcoesDados">
-			<span>Fator de Ajuste.</span>
-			<input type="number" name="nbrFatorAjuste" id="nbrFatorAjuste" min="-3" max="3" value="0" required="required">
+			<span>Casas Decimais.</span><br>
+			<input type="number" name="nbrCasasDecimais" id="nbrCasasDecimais" min="0" max="9" value="2" required="required">
 		</div>
-		
+
 		<div id="boxEnviarDados">
 			<input type="submit" name="sbmtDados" id="sbmtDados" value="Inserir">
 			<input type="reset" name="rstDados" id="rstDados" value="Limpar">
@@ -51,19 +51,19 @@
 
 		<h2>População</h2>
 
-		<span id="populacaoTamanho"></span>
-		<span id="populacaoAmplitudeAmostral"></span>
+		<span id="somatorioFi"></span>
+		<span id="amplitudeAmostral"></span>
 		<span id="elementoMenor"></span>
 		<span id="elementoMaior"></span>
-		<span id="populacaoNumeroClasses"></span>
-		<span id="populacaoAmplitudeIntervaloClasse"></span>
-		<span id="populacaoMedia"></span>
-		<span id="populacaoMediana"></span>
-		<span id="populacaoModa"></span>
-		<span id="populacaoVariancia"></span>
-		<span id="populacaoVarianciaRelativa"></span>
-		<span id="populacaoDesvioPadrao"></span>
-		<span id="populacaoCoeficienteVariacao"></span>
+		<span id="numeroClasses"></span>
+		<span id="amplitudeIntervaloClasse"></span>
+		<span id="media"></span>
+		<span id="mediana"></span>
+		<span id="moda"></span>
+		<span id="variancia"></span>
+		<span id="varianciaRelativa"></span>
+		<span id="desvioPadrao"></span>
+		<span id="coeficienteVariacao"></span>
 
 	</div>
 
@@ -100,6 +100,9 @@
 			<article description="content">
 
 				<h2>Ajuda</h2>
+
+				<div id="boxMessage"></div>
+
 				<p><strong>Inserir dados:</strong></p>
 				<ul>
 					<li>Insira os dados um a um, ou separados por virgula.<br>Ex: 1, 3, 23, 54, 119</li>
@@ -115,12 +118,10 @@
 
 
 <?php
-echo "<p><strong>Parâmetro GET:</strong> ";
+/*echo "<p><strong>Parâmetro GET:</strong> ";
 echo $target;    
-echo "</p>";
+echo "</p>";*/
 ?>
-
-				<div id="boxMessage"></div>
 
 			</article>
 

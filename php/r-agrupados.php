@@ -16,84 +16,94 @@ if (!empty($dados)) {
 	$dadosDesordenados = (empty($dadosDesordenados)) ? $dados : $dadosDesordenados.", ".$dados;
 	$dadosOrdenados = (empty($dadosOrdenados)) ? $dados : $dadosOrdenados.", ".$dados;
 
+} elseif (empty($dadosOrdenados) || empty($dadosDesordenados)) {
+	
+	// Vai para o fim do script e retorna com erro
+	$resultado = array("error" => "Nenhum dado enviado");
+	goto END;
+
 }
 
 //********************************************************//
 
-// Explode os dados das strings para para um array $rol
-$rol = explode(", ", $dadosOrdenados);
+// Explode os dados das strings para para um array $preRol e ordena os dados do array $rol
+$preRol = explode(",", $dadosDesordenados);
+$rol = array();
 
-//********************************************************//
+foreach ($preRol as $ordem => $elemento) {
 
-// Ordena os dados do array $rol
+	$rol[$ordem] = trim($elemento);
+
+}
+
+$dadosDesordenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
+
 sort($rol);
+
 $dadosOrdenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
-/*echo "<pre>Rol:<br>";
-print_r($rol);	
-echo "<pre>";*/
 
 //********************************************************//
 
 // Obtem o tamanho da populacao
-$populacaoTamanho = count($rol);
-//echo "populacaoTamanho = ".$populacaoTamanho."<br>";
+$somatorioFi = count($rol);
+//echo "somatorioFi = ".$somatorioFi."<br>";
 
 //********************************************************//
 
 // Define a Amplitude Amostral
 $elementoMaior = max($rol);
 $elementoMenor = min($rol);
-$populacaoAmplitudeAmostral = $elementoMaior - $elementoMenor;
-//echo "populacaoAmplitudeAmostral = ".$populacaoAmplitudeAmostral."<br>";
+$amplitudeAmostral = $elementoMaior - $elementoMenor;
+//echo "amplitudeAmostral = ".$amplitudeAmostral."<br>";
 
 //********************************************************//
 
 // Define o numero de classes
-//$a = log($populacaoTamanho);
+//$a = log($somatorioFi);
 //$b = 1 + (3.322 * $a);
-$a = sqrt($populacaoTamanho);
-$populacaoNumeroClasses = round($a + $fatorAjuste); //round($a);
-//echo "populacaoNumeroClasses = ".$populacaoNumeroClasses."<br>";
+$a = sqrt($somatorioFi);
+$numeroClasses = round($a + $fatorAjuste); //round($a);
+//echo "numeroClasses = ".$numeroClasses."<br>";
 
 //********************************************************//
 
 // Define a Amplitude do Intervalo de Classes
-$a = $populacaoAmplitudeAmostral / $populacaoNumeroClasses;
-$populacaoAmplitudeIntervaloClasse = round($a);
-//echo "populacaoAmplitudeIntervaloClasse = ".$populacaoAmplitudeIntervaloClasse."<br>";
+$a = $amplitudeAmostral / $numeroClasses;
+$amplitudeIntervaloClasse = round($a);
+//echo "amplitudeIntervaloClasse = ".$amplitudeIntervaloClasse."<br>";
 
 //********************************************************//
 
 // Define as classes e os arrays que transportam os dados da tabela de distribuicao de frequencia
-$arrayClasses = array();
-$arrayXi = array();
-$arrayFi = array();
-$arrayXiFi = array();
-$arrayFri = array();
-$arrayFrip = array();
-$arrayFaci = array();
-$arrayFraci = array();
-$arrayFracip = array();
+$classes = array();
+$xi = array();
+$fi = array();
+$xiFi = array();
+$fri = array();
+$frip = array();
+$faci = array();
+$fraci = array();
+$fracip = array();
 
 $a = $elementoMenor;
 $i = 0;
 $j = 0;
 
 // Frequencia acumulada inicial
-$faci = 0;
+$somaFaci = 0;
 
 while ($a < $elementoMaior) {
 
-	$b = $a + $populacaoAmplitudeIntervaloClasse;
+	$b = $a + $amplitudeIntervaloClasse;
 	$c = 0;
 
 	$i++;
 
 	// Intervalos de Classes
-	$arrayClasses[$i] = "$a |--- $b";
+	$classes[$i] = "$a |--- $b";
 
 	// Ponto medio dos intervalos de classes
-	$arrayXi[$i] = ($a + $b) / 2;
+	$xi[$i] = ($a + $b) / 2;
 
 	// Frequencia simples
 	$sair = 0;
@@ -112,79 +122,85 @@ while ($a < $elementoMaior) {
 	
 	} while ($sair != 1);
 
-	$arrayFi[$i] = $c;
+	$fi[$i] = $c;
 
 	// Ponto medio x frequencia
-	$arrayXiFi[$i] = $arrayXi[$i] * $arrayFi[$i];
+	$xiFi[$i] = $xi[$i] * $fi[$i];
 
 	// Frequencia relativa
-	$d = $c / $populacaoTamanho;
-	$arrayFri[$i] = round($d, $casasDecimais);
+	$d = $c / $somatorioFi;
+	$fri[$i] = round($d, $casasDecimais);
 
 	// Frequencia relativa percentual
 	$e = $d * 100;
-	$arrayFrip[$i] = round($e, $casasDecimais);
+	$frip[$i] = round($e, $casasDecimais);
 
 	// Frequencia acumulada
-	$faci += $c;
-	$arrayFaci[$i] = $faci;
+	$somaFaci += $c;
+	$faci[$i] = $somaFaci;
 
 	// Frequencia relativa acumulada
-	$d = $faci / $populacaoTamanho;
-	$arrayFraci[$i] = round($d, $casasDecimais);
+	$d = $somaFaci / $somatorioFi;
+	$fraci[$i] = round($d, $casasDecimais);
 
 	// Frequencia relativa acumulada percentual
 	$e = $d * 100;
-	$arrayFracip[$i] = round($e, $casasDecimais);
+	$fracip[$i] = round($e, $casasDecimais);
 
-	$a += $populacaoAmplitudeIntervaloClasse;
+	$a += $amplitudeIntervaloClasse;
 
 }
 
 //echo "<pre>Classes:<br>";
-//print_r($arrayClasses);
+//print_r($classes);
 //echo "<br>Frequência:<br>";
-//print_r($arrayFi);	
+//print_r($fi);	
 //echo "<pre>";
 
 //********************************************************//
 
 // Media
-$a = array_sum($arrayXiFi);
-$b = $a / $populacaoTamanho;
-$populacaoMedia = round($b, $casasDecimais);
+$a = array_sum($xiFi);
+$b = $a / $somatorioFi;
+$media= round($b, $casasDecimais);
 /*echo "<pre>Média: ".$populacaoMedia."</pre>";*/
 
 //********************************************************//
 
 // Mediana
-$a = array_sum($arrayFi) / 2;
+$a = array_sum($fi) / 2;
 $limiteInferior = $elementoMenor;
 $somatorioFiAnteriores = 0;
-$i = 1;
+$i= 1;
 
-while ($a > $arrayFaci[$i]) {
+while ($a > $faci[$i]) {
 
-	$limiteInferior += $populacaoAmplitudeIntervaloClasse;
-	$somatorioFiAnteriores += $arrayFi[$i];
+	$limiteInferior += $amplitudeIntervaloClasse;
+	$somatorioFiAnteriores += $fi[$i];
 	$i ++;
-	$frequenciaClasseMediana = $arrayFi[$i];
+	$frequenciaClasseMediana = $fi[$i];
 
 }
 
-$c = $limiteInferior + ((($a - $somatorioFiAnteriores) / $frequenciaClasseMediana) * $populacaoAmplitudeIntervaloClasse);
-$populacaoMediana = round($c, $casasDecimais);
+if ($i == 1) {
 
-/*echo "<pre>Posição Mediana: ".$posicaoMediana." Mediana: ".$populacaoMediana."</pre>";*/
+	$frequenciaClasseMediana = $fi[$i];
+
+}
+
+$c = $limiteInferior + ((($a - $somatorioFiAnteriores) / $frequenciaClasseMediana) * $amplitudeIntervaloClasse);
+$mediana = round($c, $casasDecimais);
+
+/*echo "<pre>Posição Mediana: ".$posicaoMediana." Mediana: ".$mediana."</pre>";*/
 
 //********************************************************//
 
 // Moda
-//$fiMaior = max($arrayFi);
+//$fiMaior = max($fi);
 //
 //$modaElementos = array();
 //
-//foreach ($arrayFi as $elemento => $elementoFi) {
+//foreach ($fi as $elemento => $elementoFi) {
 //	
 //	if ($elementoFi == $fiMaior) {
 //
@@ -204,7 +220,7 @@ echo "<pre>";*/
 // Variancia
 //$somatorio = 0;
 //
-//foreach ($arrayFi as $elemento => $elementoFi) {
+//foreach ($fi as $elemento => $elementoFi) {
 //	
 //	//echo "<pre>";
 //	$a = $elemento - $populacaoMedia;
@@ -218,14 +234,14 @@ echo "<pre>";*/
 //
 //}
 //
-//$a = $somatorio / $populacaoTamanho;
+//$a = $somatorio / $somatorioFi;
 //$populacaoVariancia = round($a, $casasDecimais);
 //echo "<pre>Variância = ".$populacaoVariancia."</pre>";
 
 //********************************************************//
 
 // Variancia Relativa
-//$a = $populacaoMedia ** 2;
+//$a = $media** 2;
 //$b = $populacaoVariancia / $a;
 //	$populacaoVarianciaRelativa = round($b, $casasDecimais);
 
@@ -249,33 +265,35 @@ echo "<pre>";*/
 $resultado = array(
 	"dadosDesordenados" => $dadosDesordenados,
 	"dadosOrdenados" => $dadosOrdenados,
-	"populacaoTamanho" => $populacaoTamanho,
+	"somatorioFi" => $somatorioFi,
 	"elementoMenor" => $elementoMenor,
 	"elementoMaior" => $elementoMaior,
-	"populacaoAmplitudeAmostral" => $populacaoAmplitudeAmostral,
-	"populacaoNumeroClasses" => $populacaoNumeroClasses,
-	"populacaoAmplitudeIntervaloClasse" => $populacaoAmplitudeIntervaloClasse,
-	"populacaoMedia" => $populacaoMedia,
-	"populacaoMediana" => $populacaoMediana,
+	"amplitudeAmostral" => $amplitudeAmostral,
+	"numeroClasses" => $numeroClasses,
+	"amplitudeIntervaloClasse" => $amplitudeIntervaloClasse,
+	"media" => $media,
+	"mediana" => $mediana,
 //	"populacaoModa" => $populacaoModa,
 //	"populacaoVariancia" => $populacaoVariancia,
 //	"populacaoVarianciaRelativa" => $populacaoVarianciaRelativa,
 //	"populacaoDesvioPadrao" => $populacaoDesvioPadrao,
 //	"populacaoCoeficienteVariacao" => $populacaoCoeficienteVariacao,
-	"arrayClasses" => $arrayClasses,
-	"arrayXi" => $arrayXi,
-	"arrayFi" => $arrayFi,
-	"arrayXiFi" => $arrayXiFi,
-	"arrayFri" => $arrayFri,
-	"arrayFrip" => $arrayFrip,
-	"arrayFaci" => $arrayFaci,
-	"arrayFraci" => $arrayFraci,
-	"arrayFracip" => $arrayFracip
+	"classes" => $classes,
+	"xi" => $xi,
+	"fi" => $fi,
+	"xiFi" => $xiFi,
+	"fri" => $fri,
+	"frip" => $frip,
+	"faci" => $faci,
+	"fraci" => $fraci,
+	"fracip" => $fracip
 );
 
 //********************************************************//
 
 // Retorna os valores em formato json
+
+END:
 echo json_encode($resultado);
 
 //********************************************************//

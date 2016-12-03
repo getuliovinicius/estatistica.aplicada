@@ -7,7 +7,6 @@ $dadosDesordenados = $_POST["txtaDadosDesordenados"];
 $dadosOrdenados = $_POST["txtaDadosOrdenados"];
 $casasDecimais = $_POST["nbrCasasDecimais"];
 $variavel = $_POST["slctVariavel"];
-//echo "<pre>variavel: ".$variavel."</pre>";
 
 //********************************************************//
 
@@ -42,23 +41,16 @@ $dadosDesordenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
 sort($rol);
 
 $dadosOrdenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
-//echo "<pre>Rol:<br>";
-//print_r($rol);	
-//echo "<pre>";
 
 //********************************************************//
 
 // Frequencia simples de cada elelemento da populacao
 $fi = array_count_values($rol);
-//echo "<pre>fi<br>";
-//print_r($fi);	
-//echo "<pre>";
 
 //********************************************************//
 
 // Tamanho da populacao
 $somatorioFi = array_sum($fi);
-//echo "<pre>Somatorio fi: ".$somatorioFi."</pre>";
 
 //********************************************************//
 
@@ -87,13 +79,10 @@ if ($somatorioDados == 0) {
 
 }
 
-//echo "<pre>Somatorio dados: ".$somatorioDados."</pre>";
-
 //********************************************************//
 
 // Media
 $media = round($somatorioDados / $somatorioFi, $casasDecimais);
-//echo "<pre>Média: ".$media."</pre>";
 
 //********************************************************//
 
@@ -109,7 +98,6 @@ if (($somatorioFi % 2) == 0) {
 }
 
 $mediana = $rol[$posicaoMediana];
-//echo "<pre>Posição Mediana: ".$posicaoMediana." Mediana: ".$mediana."</pre>";
 
 //********************************************************//
 
@@ -129,7 +117,6 @@ foreach ($fi as $elemento => $elementoFi) {
 }
 
 $moda = (count($modaElementos) == 1) ? $modaElementos[0] : implode("; ", $modaElementos);
-//echo "<pre>Moda: ".$moda."<pre>";
 
 //********************************************************//
 
@@ -139,32 +126,26 @@ $somatorioXiMediaFi = 0;
 foreach ($fi as $elemento => $elementoFi) {
 	
 	$numerador = (($elemento - $media) ** 2) * $elementoFi;
-	//echo "<pre>((".$elemento." - ".$media.")²) * ".$elementoFi." = ".$a."</pre>";
 	$somatorioXiMediaFi += $numerador; 
-	//echo "<pre>Somatório = ".$somatorioXiMediaFi."</pre>";
 
 }
 
 $variancia = round($somatorioXiMediaFi / $somatorioFi, $casasDecimais);
-//echo "<pre>Variância = ".$variancia."</pre>";
 
 //********************************************************//
 
 // Variancia Relativa
 $varianciaRelativa = round($variancia / ($media ** 2), $casasDecimais);
-//echo "<pre>Variância Relativa = ".$varianciaRelativa."</pre>";
 
 //********************************************************//
 
 // Desvio Padrao
 $desvioPadrao = round(sqrt($variancia), $casasDecimais);
-//echo "<pre>Desvio Padrão = ".$desvioPadrao."</pre>";
 
 //********************************************************//
 
 // Coeficiente de Variacao
 $coeficienteVariacao = round(($desvioPadrao / $media) * 100, $casasDecimais);
-//echo "<pre>Coeficiente de Variação = ".$coeficienteVariacao."</pre>";
 
 //********************************************************//
 
@@ -228,12 +209,11 @@ $resultado = array(
 
 //********************************************************//
 
+// Retorna os valores em formato json
+
 END:
 
-// Retorna os valores em formato json
-//echo "<pre>";
 echo json_encode($resultado);
-//echo "</pre>";
 
 //********************************************************//
 ?>
