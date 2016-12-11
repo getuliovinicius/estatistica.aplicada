@@ -1,4 +1,4 @@
-# estatistica.aplicada
+# estatística.aplicada
 
 Projeto da disciplina de Estatística Aplicada do curso de Análise e Desenvolvimento de Sistemas da FATEC de Franca.
 
