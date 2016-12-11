@@ -25,7 +25,6 @@ $(function() {
 
 				if (resultado.error === undefined) {
 
-					//console.log(resultado);
 					$("#boxPopulacao").css('display', 'block');
 					$("#tableFrequencia").css('display', 'block');
 					$('#boxMessage').html('Dados inseridos com sucesso.').css('background-color', '#A4D899').css('color', '#125005').css('display', 'block');
@@ -110,7 +109,8 @@ $(function() {
 		$('#sbmtDados').val('Inserir');
 		$('#txtaDadosDesordenados').val('');
 		$('#txtaDadosOrdenados').val('');
-		$('#slctVariavel').val('0');
+		$('#nbrCasasDecimais').val('2')
+		$('#rdiQuantitativa').prop('checked', true);
 		$('#txtDados').val('').focus();
 
 	});

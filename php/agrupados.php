@@ -6,9 +6,9 @@
 
 <article class="mainArticleBox">
 
-	<h1>Dados NÃO agrupados</h1>
+	<!--<h1>Dados agrupados</h1>-->
 
-	<!--<form method="POST" id="formColetaDados" action="/php/r-nao-agrupados.php">-->
+	<!--<form method="POST" id="formColetaDados" action="/php/r-agrupados.php">-->
 	<form method="POST" id="formColetaDados">
 								
 		<!--<h2>Coleta de Dados</h2>-->
@@ -19,12 +19,8 @@
 		</div>
 
 		<div class="boxOpcoesDados">
-			<label for="slctVariavel">Variavel:</label><br>
-			<select name="slctVariavel" id="slctVariavel">
-				<option value="0" selected="selected">-----</option>
-				<option value="1">Quantitativa</option>
-				<option value="2">Qualitativa</option>
-			</select>
+			<span>Fator de Ajuste.</span><br>
+			<input type="number" name="nbrFatorAjuste" id="nbrFatorAjuste" min="-5" max="5" value="0" required="required">
 		</div>
 
 		<div class="boxOpcoesDados">
@@ -56,7 +52,11 @@
 		<h2>População</h2>
 
 		<span id="somatorioFi"></span>
-		<span id="somatorioDados"></span>
+		<span id="amplitudeAmostral"></span>
+		<span id="elementoMenor"></span>
+		<span id="elementoMaior"></span>
+		<span id="numeroClasses"></span>
+		<span id="amplitudeIntervaloClasse"></span>
 		<span id="media"></span>
 		<span id="mediana"></span>
 		<span id="moda"></span>
@@ -74,8 +74,12 @@
 		<table>
 			<thead>
 				<tr>
-					<th>El.</th>
+					<th>i</th>
+					<th>classe</th>
 					<th>fi</th>
+					<th>xi</th>
+					<th>xi*fi</th>
+					<th>(x-xi)²fi</th>
 					<th>fri</th>
 					<th>fri%</th>
 					<th>faci</th>
@@ -84,7 +88,6 @@
 				</tr>
 			</thead>
 			<tbody></tbody>
-			<tfoot></tfoot>
 		</table>
 
 	</div>
@@ -105,17 +108,21 @@
 				<ul>
 					<li>Insira os dados um a um, ou separados por virgula.<br>Ex: 1, 3, 23, 54, 119</li>
 					<li>Use (.) ponto para valores decimais.<br>Ex: 1.2, 2.4, 23.12</li>
-					<li>Outras formas:<br>A, B, C, D, A, D, C, F, A<br>João, Maria, Joaquim, Joana, João</li>
 				</ul>
-				<p><strong>Casas Decimais:</strong></p>
-				<p>Escolha de 0 até 9 a quantidade de casas decimais que deseja para arredondar os cálculos.</p>
+				<p><strong>Fator de Ajustes:</strong><br>
+				Escolha de -5 até 5 o fator de ajuste do intervalo de classes que melhor represente sua população.</p>
+				<p><strong>Casas Decimais:</strong><br>
+				Escolha de 0 até 9 a quantidade de casas decimais que deseja para arredondar os cálculos.</p>
+				<p><strong>Número de classes:</strong><br>
+				<!--<p>Método de Sturges<br>K = 1 + 3,322 x log n</p>-->
+				Raiz quadrada de n<br>K = (n)<sup>1/2</sup></p>
+
 
 <?php
 /*echo "<p><strong>Parâmetro GET:</strong> ";
 echo $target;    
 echo "</p>";*/
 ?>
-
 
 			</article>
 

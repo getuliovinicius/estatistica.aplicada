@@ -1,6 +1,5 @@
 <?php
-//********************************************************//
-
+//####################################################################################################//
 // Recebe os dados do formulario
 $dados = $_POST["txtDados"];
 $dadosDesordenados = $_POST["txtaDadosDesordenados"];
@@ -8,24 +7,28 @@ $dadosOrdenados = $_POST["txtaDadosOrdenados"];
 $casasDecimais = $_POST["nbrCasasDecimais"];
 $fatorAjuste = $_POST["nbrFatorAjuste"];
 
-//********************************************************//
+//echo $dados;
 
+//####################################################################################################//
+//Declarar o array que vai retornar como resultado
+$resultado = array();
+
+//####################################################################################################//
 // Testa se não foram enviados dados e se já haviam sido enviados dados
-if (!empty($dados)) {
+if (!empty($dados) || ($dados == "0")) {
 
-	$dadosDesordenados = (empty($dadosDesordenados)) ? $dados : $dadosDesordenados.", ".$dados;
-	$dadosOrdenados = (empty($dadosOrdenados)) ? $dados : $dadosOrdenados.", ".$dados;
+	$dadosDesordenados = (!empty($dadosDesordenados) || ($dadosDesordenados == "0")) ? $dadosDesordenados.", ".$dados : $dados;
+	$dadosOrdenados = (!empty($dadosOrdenados) || ($dadosOrdenados == "0")) ? $dadosOrdenados.", ".$dados : $dados;
 
 } elseif (empty($dadosOrdenados) || empty($dadosDesordenados)) {
-	
+
 	// Vai para o fim do script e retorna com erro
-	$resultado = array("error" => "Nenhum dado enviado");
+	$resultado["error"] = "Nenhum dado enviado";
 	goto END;
 
 }
 
-//********************************************************//
-
+//####################################################################################################//
 // Explode os dados das strings para para um array $preRol e ordena os dados do array $rol
 $preRol = explode(",", $dadosDesordenados);
 $rol = array();
@@ -34,46 +37,42 @@ foreach ($preRol as $ordem => $elemento) {
 
 	$rol[$ordem] = trim($elemento);
 
+	if (!is_numeric($rol[$ordem])) {
+
+		// Vai para o fim do script e retorna com erro
+		$resultado["error"] = "Tipo de dado incorreto";
+		goto END;
+
+	}
+
 }
 
 $dadosDesordenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
-
 sort($rol);
-
 $dadosOrdenados = (count($rol) == 1) ? $rol[0] : implode(", ", $rol);
 
-//********************************************************//
-
+//####################################################################################################//
 // Obtem o tamanho da populacao
 $somatorioFi = count($rol);
-//echo "somatorioFi = ".$somatorioFi."<br>";
 
-//********************************************************//
+//####################################################################################################//
 
 // Define a Amplitude Amostral
 $elementoMaior = max($rol);
 $elementoMenor = min($rol);
 $amplitudeAmostral = $elementoMaior - $elementoMenor;
-//echo "amplitudeAmostral = ".$amplitudeAmostral."<br>";
 
-//********************************************************//
-
+//####################################################################################################//
 // Define o numero de classes
 //$a = log($somatorioFi);
 //$b = 1 + (3.322 * $a);
-$a = sqrt($somatorioFi);
-$numeroClasses = round($a + $fatorAjuste); //round($a);
-//echo "numeroClasses = ".$numeroClasses."<br>";
+$numeroClasses = round(sqrt($somatorioFi) + $fatorAjuste);
 
-//********************************************************//
-
+//####################################################################################################//
 // Define a Amplitude do Intervalo de Classes
-$a = $amplitudeAmostral / $numeroClasses;
-$amplitudeIntervaloClasse = round($a);
-//echo "amplitudeIntervaloClasse = ".$amplitudeIntervaloClasse."<br>";
+$amplitudeIntervaloClasse = round(($amplitudeAmostral / $numeroClasses));
 
-//********************************************************//
-
+//####################################################################################################//
 // Define as classes e os arrays que transportam os dados da tabela de distribuicao de frequencia
 $classes = array();
 $xi = array();
@@ -85,25 +84,24 @@ $faci = array();
 $fraci = array();
 $fracip = array();
 
-$a = $elementoMenor;
-$i = 0;
+$classe = 1;
 $j = 0;
+
+$a = $elementoMenor;
 
 // Frequencia acumulada inicial
 $somaFaci = 0;
 
-while ($a < $elementoMaior) {
+while ($classe <= $numeroClasses) {
 
 	$b = $a + $amplitudeIntervaloClasse;
 	$c = 0;
 
-	$i++;
-
 	// Intervalos de Classes
-	$classes[$i] = "$a |--- $b";
+	$classes[$classe] = "$a |--- $b";
 
 	// Ponto medio dos intervalos de classes
-	$xi[$i] = ($a + $b) / 2;
+	$xi[$classe] = ($a + $b) / 2;
 
 	// Frequencia simples
 	$sair = 0;
@@ -122,51 +120,42 @@ while ($a < $elementoMaior) {
 	
 	} while ($sair != 1);
 
-	$fi[$i] = $c;
+	$fi[$classe] = $c;
 
-	// Ponto medio x frequencia
-	$xiFi[$i] = $xi[$i] * $fi[$i];
+	// elementos x frequencia
+	$xiFi[$classe] = $xi[$classe] * $fi[$classe];
 
 	// Frequencia relativa
 	$d = $c / $somatorioFi;
-	$fri[$i] = round($d, $casasDecimais);
+	$fri[$classe] = round($d, $casasDecimais);
 
 	// Frequencia relativa percentual
 	$e = $d * 100;
-	$frip[$i] = round($e, $casasDecimais);
+	$frip[$classe] = round($e, $casasDecimais);
 
 	// Frequencia acumulada
 	$somaFaci += $c;
-	$faci[$i] = $somaFaci;
+	$faci[$classe] = $somaFaci;
 
 	// Frequencia relativa acumulada
 	$d = $somaFaci / $somatorioFi;
-	$fraci[$i] = round($d, $casasDecimais);
+	$fraci[$classe] = round($d, $casasDecimais);
 
 	// Frequencia relativa acumulada percentual
 	$e = $d * 100;
-	$fracip[$i] = round($e, $casasDecimais);
+	$fracip[$classe] = round($e, $casasDecimais);
 
 	$a += $amplitudeIntervaloClasse;
 
+	$classe++;
+
 }
 
-//echo "<pre>Classes:<br>";
-//print_r($classes);
-//echo "<br>Frequência:<br>";
-//print_r($fi);	
-//echo "<pre>";
-
-//********************************************************//
-
+//####################################################################################################//
 // Media
-$a = array_sum($xiFi);
-$b = $a / $somatorioFi;
-$media= round($b, $casasDecimais);
-/*echo "<pre>Média: ".$populacaoMedia."</pre>";*/
+$media = round(array_sum($xiFi) / $somatorioFi, $casasDecimais);
 
-//********************************************************//
-
+//####################################################################################################//
 // Mediana
 $a = array_sum($fi) / 2;
 $limiteInferior = $elementoMenor;
@@ -188,79 +177,53 @@ if ($i == 1) {
 
 }
 
-$c = $limiteInferior + ((($a - $somatorioFiAnteriores) / $frequenciaClasseMediana) * $amplitudeIntervaloClasse);
+$c = ($frequenciaClasseMediana != 0) ? $limiteInferior + ((($a - $somatorioFiAnteriores) / $frequenciaClasseMediana) * $amplitudeIntervaloClasse) : 0;
 $mediana = round($c, $casasDecimais);
 
-/*echo "<pre>Posição Mediana: ".$posicaoMediana." Mediana: ".$mediana."</pre>";*/
-
-//********************************************************//
-
+//####################################################################################################//
 // Moda
-//$fiMaior = max($fi);
-//
-//$modaElementos = array();
-//
-//foreach ($fi as $elemento => $elementoFi) {
-//	
-//	if ($elementoFi == $fiMaior) {
-//
-//		$modaElementos[] = $elemento;
-//
-//	}
-//
-//}
-//
-//$populacaoModa = (count($modaElementos) == 1) ? $modaElementos[0] : implode(", ", $modaElementos);
-/*echo "<pre>Moda:<br>";
-print_r($populacaoModa);	
-echo "<pre>";*/
+$fiMaior = max($fi);
 
-//********************************************************//
+$modaElementos = array();
 
+foreach ($fi as $elemento => $elementoFi) {
+	
+	if ($elementoFi == $fiMaior) {
+
+		$modaElementos[] = $xi[$elemento];
+
+	}
+
+}
+
+$moda = (count($modaElementos) == 1) ? $modaElementos[0] : implode(", ", $modaElementos);
+
+//####################################################################################################//
 // Variancia
-//$somatorio = 0;
-//
-//foreach ($fi as $elemento => $elementoFi) {
-//	
-//	//echo "<pre>";
-//	$a = $elemento - $populacaoMedia;
-//	//echo "a = ".$a."<br>";
-//	$b = $a ** 2;
-//	//echo "b = ".$b."<br>";
-//	$c = $b * $elementoFi;
-//	//echo "c = ".$c."<br>";
-//	$somatorio += $c; 
-//	//echo "Somatório = ".$somatorio."</pre>";
-//
-//}
-//
-//$a = $somatorio / $somatorioFi;
-//$populacaoVariancia = round($a, $casasDecimais);
-//echo "<pre>Variância = ".$populacaoVariancia."</pre>";
+$somatorio = 0;
 
-//********************************************************//
+foreach ($fi as $elemento => $elementoFi) {
+	
+	$xXi2Fi[$elemento] = (($media - $xi[$elemento]) ** 2) * $elementoFi;
+	$somatorio += $xXi2Fi[$elemento];
 
+}
+
+$variancia = round($somatorio / $somatorioFi, $casasDecimais);
+
+//####################################################################################################//
 // Variancia Relativa
-//$a = $media** 2;
-//$b = $populacaoVariancia / $a;
-//	$populacaoVarianciaRelativa = round($b, $casasDecimais);
+$varianciaRelativa = ($media != 0) ? round($variancia / ($media ** 2), $casasDecimais) : 0;
 
-//********************************************************//
-
+//####################################################################################################//
 // Desvio Padrão
-//$a = sqrt($populacaoVariancia);
-//$populacaoDesvioPadrao = round($a, $casasDecimais);
-//echo "<pre>Desvio Padrão = ".$populacaoDesvioPadrao."</pre>";
+$desvioPadrao = round(sqrt($variancia), $casasDecimais);
 
-//********************************************************//
-
+//####################################################################################################//
 // Coeficiente de Variação
-//$a = $populacaoDesvioPadrao / $populacaoMedia;
-//$b = $a * 100;
-//$populacaoCoeficienteVariacao = round($b, $casasDecimais);
+$coeficienteVariacao = ($media != 0) ? round(($desvioPadrao / $media) * 100, $casasDecimais) : 0;
 
-//********************************************************//
-
+//####################################################################################################//
 // Monta um array para retornar os valores
 $resultado = array(
 	"dadosDesordenados" => $dadosDesordenados,
@@ -273,15 +236,16 @@ $resultado = array(
 	"amplitudeIntervaloClasse" => $amplitudeIntervaloClasse,
 	"media" => $media,
 	"mediana" => $mediana,
-//	"populacaoModa" => $populacaoModa,
-//	"populacaoVariancia" => $populacaoVariancia,
-//	"populacaoVarianciaRelativa" => $populacaoVarianciaRelativa,
-//	"populacaoDesvioPadrao" => $populacaoDesvioPadrao,
-//	"populacaoCoeficienteVariacao" => $populacaoCoeficienteVariacao,
+	"moda" => $moda,
+	"variancia" => $variancia,
+	"varianciaRelativa" => $varianciaRelativa,
+	"desvioPadrao" => $desvioPadrao,
+	"coeficienteVariacao" => $coeficienteVariacao,
 	"classes" => $classes,
-	"xi" => $xi,
 	"fi" => $fi,
+	"xi" => $xi,
 	"xiFi" => $xiFi,
+	"xXi2Fi" => $xXi2Fi,
 	"fri" => $fri,
 	"frip" => $frip,
 	"faci" => $faci,
@@ -289,12 +253,12 @@ $resultado = array(
 	"fracip" => $fracip
 );
 
-//********************************************************//
-
-// Retorna os valores em formato json
-
+//####################################################################################################//
+// Ponto para onde o programa deve prosseguir caso tenham ocorrido erros
 END:
+
+//####################################################################################################//
+// Retorna os valores em formato json
 echo json_encode($resultado);
 
-//********************************************************//
 ?>

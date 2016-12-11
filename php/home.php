@@ -6,8 +6,12 @@
 
 <article class="mainArticleBox">
 
-	<h1>Seja bem vindo.</h1>
+	<h2><strong>Estatística.Aplicada - versão 1.0</strong></h2>
 	<p>Escolha uma opção no menu.</p>
+	<ul>
+		<li>Dados agrupados</li>
+		<li>Dados não agrupados</li>
+	</ul>
 	
 </article>
 
@@ -17,12 +21,11 @@
 
 			<article description="content">
 
-				<h2>Ajuda</h2>
 
 <?php
-echo "<p><strong>Parâmetro GET:</strong> ";
+/*echo "<p><strong>Parâmetro GET:</strong> ";
 echo $target;    
-echo "</p>";
+echo "</p>";*/
 ?>
 
 			</article>
