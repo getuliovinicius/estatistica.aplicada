@@ -14,8 +14,7 @@ Ná área de estatística descritiva, o aplicativo monta a tabela de distribuiç
 - PHP 5.6 ou superior;
 
 ## Instalação:
-Basta descompactar os arquivo na raiz de um virtualHost.
-A estru ficará parecida com:
+Basta descompactar os arquivo na raiz de um virtualHost. A estrura ficará parecida com:
 - DocumentRoot/assets
 - DocumentRoot/php
 - DocumentRoot/index.php
