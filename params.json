@@ -1,6 +1,0 @@
-{
-  "name": "estatística.aplicada",
-  "tagline": "Aplicativo para a cálculos de estatística descritiva.",
-  "body": "Projeto da disciplina de Estatística Aplicada do curso de Análise e Desenvolvimento de Sistemas da FATEC de Franca.\r\n\r\nNá área de estatística descritiva, o aplicativo monta a tabela de distribuição de frequência, sem intervalo de classes e com intervalo de classes, além de calcular a Média, a Moda, a Mediana, a Variância e o Desvio Padrão.\r\n\r\n## Desenvolvido em:\r\n- PHP;\r\n- HTML + CSS;\r\n- Javascript com o framework jQuery\r\n\r\n## Requisitos:\r\n- Apache;\r\n- PHP 5.6 ou superior;\r\n\r\n## Instalação:\r\nBasta descompactar os arquivo na raiz de um virtualHost.\r\nA estrura ficará parecida com:\r\n- DocumentRoot/assets\r\n- DocumentRoot/php\r\n- DocumentRoot/index.php\r\n- DocumentRoot/.htaccess\r\n- DocumentRoot/README.md\r\n- DocumentRoot/LICENCE\r\n\r\n**A coclusão deste trabalho para a Faculdade, aplicativo, é dedicado à memória das vítimas no acidente com o avião da Chapecoense em 29/11/2016, data na qual este trabalho foi entregue para nota.**\r\n**#ForçaChape**\r\n",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}
