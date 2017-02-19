@@ -1,2 +1,5 @@
 # Arquivo de texto
 *.txt
+
+# Documentacao
+/docs/site/

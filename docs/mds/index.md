@@ -1,5 +1,9 @@
 # estatística.aplicada
 
+## Repositório no Github
+
+Acesse os exercícios no Repositório do Github [estatística.aplicada](https://github.com/getuliovinicius/estatística.aplicada).
+
 ## Descrição
 
 Projeto da disciplina de Estatística Aplicada do curso de Análise e Desenvolvimento de Sistemas da FATEC de Franca.
@@ -29,6 +33,9 @@ Basta descompactar os arquivo na raiz de um virtualHost. A estrura ficará parec
 /README.md
 /LICENCE
 ```
+## Licença:
+
+[GNU GENERAL PUBLIC LICENSE - Version 3, 29 June 2007](https://github.com/getuliovinicius/estatistica.aplicada/blob/master/LICENSE).
 
 ## Dedicado a Chape
 

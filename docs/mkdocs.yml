@@ -1,0 +1,13 @@
+site_name: Estatistica Aplicada
+site_description: Projeto da disciplina de Estatística Aplicada do curso de Análise e Desenvolvimento de Sistemas da FATEC de Franca.
+site_author: Getúlio Vinicius <getuliovinits@gmail.com>
+google_analytics: ['UA-70830801-5', 'getuliovinicius.github.io/estatistica.aplicada/']
+repo_url: https://github.com/getuliovinicius/estatistica.aplicada
+repo_name: GitHub
+edit_uri: blob/master/docs/mds/
+remote_branch: gh-pages
+remote_name: origin
+docs_dir: 'mds'
+pages:
+  - Inicio: index.md
+theme: readthedocs
