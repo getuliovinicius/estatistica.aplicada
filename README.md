@@ -13,12 +13,12 @@ Ná área de estatística descritiva, o aplicativo monta a tabela de distribuiç
 + HTML + CSS;
 + Javascript com o framework jQuery
 
-## Requisitos:
+## Requisitos
 
 + Apache;
 + PHP 5.6 ou superior;
 
-## Instalação:
+## Instalação
 
 Basta descompactar os arquivo na raiz de um _virtualHost_. A estrutura ficará parecida com:
 
