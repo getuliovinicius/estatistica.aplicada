@@ -1,4 +1,5 @@
-# estatística.aplicada
+estatística.aplicada
+====================
 
 ## Descrição
 
@@ -8,20 +9,20 @@ Ná área de estatística descritiva, o aplicativo monta a tabela de distribuiç
 
 ## Desenvolvido em:
 
-- PHP;
-- HTML + CSS;
-- Javascript com o framework jQuery
++ PHP;
++ HTML + CSS;
++ Javascript com o framework jQuery
 
 ## Requisitos:
 
-- Apache;
-- PHP 5.6 ou superior;
++ Apache;
++ PHP 5.6 ou superior;
 
 ## Instalação:
 
-Basta descompactar os arquivo na raiz de um virtualHost. A estrura ficará parecida com:
+Basta descompactar os arquivo na raiz de um _virtualHost_. A estrutura ficará parecida com:
 
-```
+``` sh
 /assets
 /php
 /index.php

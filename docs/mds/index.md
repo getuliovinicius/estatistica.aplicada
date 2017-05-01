@@ -1,8 +1,9 @@
-# estatística.aplicada
+estatística.aplicada
+====================
 
 ## Repositório no Github
 
-Acesse os exercícios no Repositório do Github [estatística.aplicada](https://github.com/getuliovinicius/estatística.aplicada).
+Acesse os exercícios no Repositório do _Github_ [estatística.aplicada](https://github.com/getuliovinicius/estatística.aplicada).
 
 ## Descrição
 
@@ -10,22 +11,22 @@ Projeto da disciplina de Estatística Aplicada do curso de Análise e Desenvolvi
 
 Ná área de estatística descritiva, o aplicativo monta a tabela de distribuição de frequência, sem intervalo de classes e com intervalo de classes, além de calcular a Média, a Moda, a Mediana, a Variância e o Desvio Padrão.
 
-## Desenvolvido em:
+## Desenvolvido em
 
-- PHP;
-- HTML + CSS;
-- Javascript com o framework jQuery
++ PHP;
++ HTML + CSS;
++ Javascript com o framework jQuery
 
-## Requisitos:
+## Requisitos
 
-- Apache;
-- PHP 5.6 ou superior;
++ Apache;
++ PHP 5.6 ou superior;
 
-## Instalação:
+## Instalação
 
-Basta descompactar os arquivo na raiz de um virtualHost. A estrura ficará parecida com:
+Basta descompactar os arquivo na raiz de um _virtualHost_. A estrutura ficará parecida com:
 
-```
+``` sh
 /assets
 /php
 /index.php
@@ -33,7 +34,8 @@ Basta descompactar os arquivo na raiz de um virtualHost. A estrura ficará parec
 /README.md
 /LICENCE
 ```
-## Licença:
+
+## Licença
 
 [GNU GENERAL PUBLIC LICENSE - Version 3, 29 June 2007](https://github.com/getuliovinicius/estatistica.aplicada/blob/master/LICENSE).
 
