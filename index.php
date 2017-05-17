@@ -16,4 +16,5 @@ include 'php/'.$target.'.php';
 
 include 'php/footer.php';
 
+echo 'Disponível no Github'
 ?>
